@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CRUD_Dapper.Models.Pessoas>
+
+@{
+    ViewData["Title"] = "Listagem de pessoas";
+}
+
+<h4>Listagem de pessoas</h4>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-success btn-sm">Nova pessoa</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PessoaID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Peso)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PessoaID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Peso)
+            </td>
+            <td>
+                <a asp-controller="Pessoas" asp-action="Edit" asp-route-pessoaid="@item.PessoaID" class="btn btn-outline-info btn-sm">Atualizar</a> &emsp;
+                <form asp-controller="Pessoas" asp-action="Delete" asp-route-pessoaid="@item.PessoaID" onclick="confirm('Prosseguir com a exclusão do usuário @item.Nome ?')">
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Excluir</button>
+                    </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
